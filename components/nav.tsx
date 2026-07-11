@@ -60,7 +60,7 @@ export function Nav() {
         className={cn(
           "relative mx-auto flex h-[60px] items-center justify-between rounded-2xl px-5 transition-all duration-500 md:px-7",
           scrolled
-            ? "border border-line bg-paper/70 shadow-[0_8px_30px_rgba(10,10,10,0.06)] backdrop-blur-xl"
+            ? "border border-black/[0.08] bg-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.06)] backdrop-blur-[16px] dark:border-white/[0.12] dark:bg-white/[0.08] dark:shadow-[0_8px_40px_rgba(0,0,0,0.45)] dark:backdrop-blur-[18px]"
             : "border border-transparent bg-transparent"
         )}
         style={{ maxWidth: "var(--width-page)" }}
@@ -154,7 +154,7 @@ export function Nav() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto mt-2 overflow-hidden rounded-2xl border border-line bg-paper/90 p-2.5 shadow-[0_18px_50px_rgba(10,10,10,0.1)] backdrop-blur-xl md:hidden"
+            className="mx-auto mt-2 overflow-hidden rounded-2xl border border-black/[0.08] bg-black/[0.08] p-2.5 shadow-[0_18px_50px_rgba(0,0,0,0.08)] backdrop-blur-[16px] dark:border-white/[0.12] dark:bg-white/[0.08] dark:shadow-[0_18px_50px_rgba(0,0,0,0.5)] dark:backdrop-blur-[18px] md:hidden"
             style={{ maxWidth: "var(--width-page)" }}
           >
             {links.map((link, index) => (
