@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, BarChart3, Code2, Rocket, Search } from "lucide-react";
 import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/primitives";
@@ -114,13 +114,13 @@ export function About() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: reduce ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden border-y border-line bg-paper px-6 py-4 sm:px-12 sm:py-8 lg:px-24 lg:py-14"
+      className="relative overflow-hidden border-y border-line bg-paper px-6 py-3 sm:px-12 sm:py-6 lg:px-24 lg:py-10"
     >
       <span className="about-aura" aria-hidden />
 
       <div className="relative mx-auto max-w-[1200px]">
         {/* ---------------- Top area ---------------- */}
-        <div className="grid gap-8 sm:gap-10 lg:grid-cols-2 lg:items-center lg:gap-12">
+        <div className="grid gap-5 sm:gap-6 lg:grid-cols-2 lg:items-center lg:gap-8">
           {/* Left: heading + description */}
           <div>
             <p className="mb-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-ink-mute">
@@ -130,7 +130,7 @@ export function About() {
               Building AI products that feel <span className="text-ink-soft">premium.</span>
             </h2>
 
-            <div className="mt-5 max-w-md border-l border-ink/15 pl-6 sm:mt-6">
+            <div className="mt-4 max-w-md border-l border-ink/15 pl-6 sm:mt-5">
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-mute">
                 Founder story
               </p>
@@ -149,26 +149,94 @@ export function About() {
             </div>
           </div>
 
-          {/* Right: rotating 3D wireframe object */}
-          <div className="flex justify-center lg:justify-end">
+          {/* Right: animated AI platform visual */}
+          <div className="flex justify-center lg:justify-end lg:pl-2">
             <div className="about-3d" aria-hidden>
-              <div className="about-3d-stage">
-                <span className="face face-front" />
-                <span className="face face-back" />
-                <span className="face face-right" />
-                <span className="face face-left" />
-                <span className="face face-top" />
-                <span className="face face-bottom" />
-                <span className="about-3d-ring about-3d-ring-1" />
-                <span className="about-3d-ring about-3d-ring-2" />
-                <span className="about-3d-core" />
+              <div className="about-orbit about-orbit-1" />
+              <div className="about-orbit about-orbit-2" />
+
+              <div className="about-callout about-callout-left">
+                <span />
+                Strategy<br />&amp; planning
+              </div>
+              <div className="about-callout about-callout-right">
+                <span />
+                Scalable<br />infrastructure
+              </div>
+
+              <div className="about-future-card">
+                <span>Build</span>
+                <span>the future</span>
+                <span>with AI</span>
+                <i />
+              </div>
+
+              <div className="about-platform" />
+              <div className="about-platform about-platform-shadow" />
+
+              <div className="about-core-box">
+                <div className="about-core-top" />
+                <div className="about-cube-grid">
+                  {Array.from({ length: 8 }).map((_, i) => (
+                    <span key={i} />
+                  ))}
+                </div>
+                <div className="about-core-face about-core-front">
+                  <strong>AI</strong>
+                  <span>Intelligence<br />layer</span>
+                </div>
+                <div className="about-core-face about-core-side">
+                  <span>Data</span>
+                  <span>Models</span>
+                  <span>Automation</span>
+                </div>
+              </div>
+
+              <div className="about-node-lattice">
+                {Array.from({ length: 9 }).map((_, i) => (
+                  <span key={i} />
+                ))}
+                <i className="about-lattice-line about-lattice-line-1" />
+                <i className="about-lattice-line about-lattice-line-2" />
+                <i className="about-lattice-line about-lattice-line-3" />
+                <i className="about-lattice-line about-lattice-line-4" />
+              </div>
+
+              <div className="about-pulse-pad">
+                <span />
+                <i />
+              </div>
+
+              <div className="about-bars">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span key={i} />
+                ))}
+              </div>
+
+              <div className="about-workflow">
+                <div>
+                  <Search size={20} />
+                  <span>Research</span>
+                </div>
+                <div>
+                  <Code2 size={20} />
+                  <span>Develop</span>
+                </div>
+                <div>
+                  <Rocket size={20} />
+                  <span>Deploy</span>
+                </div>
+                <div>
+                  <BarChart3 size={20} />
+                  <span>Grow</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* ---------------- Stats block — naturally follows ---------------- */}
-        <div className="mt-10 sm:mt-12 lg:mt-14">
+        <div className="mt-6 sm:mt-8 lg:mt-9">
           <div className="mb-4 flex justify-center">
             <span className="inline-flex items-center gap-2.5 rounded-full border border-line bg-mist px-4 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink-soft">
               <span className="h-1.5 w-1.5 rounded-full bg-ink" />
