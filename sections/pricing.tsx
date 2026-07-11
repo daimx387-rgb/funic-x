@@ -79,14 +79,7 @@ export function Pricing() {
     <section id="pricing" className="section relative bg-mist">
       <div className="container-x">
         <SectionLabel>Pricing</SectionLabel>
-        <Reveal className="mx-auto mb-16 max-w-[680px] text-center">
-          <h2 className="text-[clamp(2rem,3.2vw+8px,3rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-ink">
-            Simple, transparent pricing.
-          </h2>
-          <p className="mx-auto mt-6 max-w-[520px] text-[clamp(1.125rem,0.6vw+0.9rem,1.25rem)] leading-[1.6] text-ink-soft">
-            Start free. Upgrade when you scale. No hidden fees, ever.
-          </p>
-        </Reveal>
+
 
         <Stagger className="grid grid-cols-1 gap-6 lg:grid-cols-3" stagger={0.1}>
           {plans.map((p) => {

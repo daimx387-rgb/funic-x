@@ -94,20 +94,10 @@ export function Features() {
       <div className="container-x">
         <SectionLabel>Features</SectionLabel>
 
-        <Reveal className="mx-auto mb-14 max-w-[720px] text-center">
-          <h2 className="text-[clamp(2rem,3vw+8px,2.75rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ink">
-            Everything you need to
-            <br />
-            ship AI with confidence.
-          </h2>
-          <p className="mx-auto mt-5 max-w-[560px] text-[clamp(0.95rem,0.4vw+0.8rem,1.075rem)] leading-[1.6] text-ink-soft">
-            A single platform that replaces a dozen fragmented tools — from
-            orchestration to observability to deployment.
-          </p>
-        </Reveal>
+
 
         <Stagger
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
           stagger={0.08}
         >
           {features.map((f) => (
@@ -158,7 +148,7 @@ function FeatureCard({ feature: f }: { feature: Feature }) {
       whileHover={reduce ? undefined : { y: -6 }}
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
       className={cn(
-        "group relative flex flex-col overflow-hidden rounded-[24px] border border-line bg-paper p-6",
+        "group relative flex flex-col overflow-hidden rounded-[20px] border border-line bg-paper p-5",
         "shadow-[0_1px_3px_rgba(10,10,10,0.05)] transition-[border-color,box-shadow] duration-[400ms]",
         "hover:border-ink/20 hover:shadow-[0_20px_48px_rgba(10,10,10,0.09)]",
         "will-change-transform",
@@ -169,7 +159,7 @@ function FeatureCard({ feature: f }: { feature: Feature }) {
       {/* Animated border glow on hover */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 rounded-[20px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background: `radial-gradient(420px circle at var(--gx,50%) var(--gy,50%), ${f.accent}14, transparent 60%)`,
         }}
@@ -178,7 +168,7 @@ function FeatureCard({ feature: f }: { feature: Feature }) {
       {/* Mouse-follow radial glow */}
       <motion.span
         aria-hidden
-        className="pointer-events-none absolute -inset-px rounded-[24px]"
+        className="pointer-events-none absolute -inset-px rounded-[20px]"
         style={{
           background: `radial-gradient(260px circle at 0px 0px, ${f.accent}1f, transparent 55%)`,
           left: sx,
@@ -194,26 +184,26 @@ function FeatureCard({ feature: f }: { feature: Feature }) {
         <motion.div
           whileHover={reduce ? undefined : { rotate: 8, scale: 1.08 }}
           transition={{ type: "spring", stiffness: 320, damping: 14 }}
-          className="relative grid h-11 w-11 place-items-center rounded-xl border border-line bg-mist text-ink transition-colors duration-500 group-hover:border-ink group-hover:bg-ink group-hover:text-paper"
+          className="relative grid h-9 w-9 place-items-center rounded-lg border border-line bg-mist text-ink transition-colors duration-500 group-hover:border-ink group-hover:bg-ink group-hover:text-paper"
         >
-          <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
+          <Icon className="h-[16px] w-[16px]" strokeWidth={2} />
           <span
             className="pointer-events-none absolute inset-0 rounded-xl opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-40"
             style={{ background: f.accent }}
           />
         </motion.div>
-        <h3 className="text-[17px] font-semibold tracking-[-0.02em] text-ink">
+        <h3 className="text-[15px] font-semibold tracking-[-0.02em] text-ink">
           {f.title}
         </h3>
       </div>
 
       {/* Description */}
-      <p className="relative mt-3 max-w-[440px] text-[13.5px] leading-[1.6] text-ink-soft">
+      <p className="relative mt-2.5 max-w-[440px] text-[13px] leading-[1.55] text-ink-soft">
         {f.desc}
       </p>
 
       {/* Visual */}
-      <div className="relative mt-5 flex-1">{f.visual}</div>
+      <div className="relative mt-4 flex-1">{f.visual}</div>
     </motion.div>
   );
 }
@@ -237,7 +227,7 @@ function PipelineVisual() {
   return (
     <div
       ref={ref}
-      className="relative flex min-h-[120px] flex-col justify-center"
+      className="relative flex min-h-[92px] flex-col justify-center"
     >
       {/* Horizontal pipeline — centered with breathing room */}
       <div className="flex items-center justify-center px-2">
@@ -334,7 +324,7 @@ function PipelineVisual() {
       </div>
 
       {/* Status bar */}
-      <div className="mt-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-ink-mute">
+      <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-ink-mute">
         <span className="flex items-center gap-2">
           <motion.span
             className="h-1.5 w-1.5 rounded-full bg-green-500"
@@ -359,7 +349,7 @@ function RoutingVisual() {
   return (
     <div
       ref={ref}
-      className="relative min-h-[150px] overflow-hidden rounded-xl border border-line-soft bg-mist/50 p-4"
+      className="relative min-h-[120px] overflow-hidden rounded-xl border border-line-soft bg-mist/50 p-3.5"
     >
       <div className="relative flex h-full items-center justify-between gap-3">
         {/* request node */}
@@ -445,7 +435,7 @@ function ObservabilityVisual() {
   return (
     <div
       ref={ref}
-      className="relative min-h-[150px] overflow-hidden rounded-xl border border-line-soft bg-mist/50 p-4"
+      className="relative min-h-[120px] overflow-hidden rounded-xl border border-line-soft bg-mist/50 p-3.5"
     >
       <div className="flex items-center justify-between">
         <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-mute">
@@ -462,7 +452,7 @@ function ObservabilityVisual() {
       </div>
 
       <svg
-        className="mt-3 h-[80px] w-full"
+        className="mt-2 h-[64px] w-full"
         viewBox="0 0 200 80"
         preserveAspectRatio="none"
       >
@@ -515,7 +505,7 @@ function SecurityVisual() {
   return (
     <div
       ref={ref}
-      className="relative min-h-[150px] overflow-hidden rounded-xl border border-line-soft bg-mist/50 p-4"
+      className="relative min-h-[120px] overflow-hidden rounded-xl border border-line-soft bg-mist/50 p-3.5"
     >
       {/* scanning line */}
       {!reduce && (
@@ -569,7 +559,7 @@ function DatasetVisual() {
   return (
     <div
       ref={ref}
-      className="relative min-h-[150px] overflow-hidden rounded-xl border border-line-soft bg-mist/50 p-4"
+      className="relative min-h-[120px] overflow-hidden rounded-xl border border-line-soft bg-mist/50 p-3.5"
     >
       <div className="relative pl-4">
         {/* vertical branch line */}

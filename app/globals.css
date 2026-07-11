@@ -75,6 +75,11 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id],
+footer[id] {
+  scroll-margin-top: 96px;
+}
+
 body {
   margin: 0;
   background: var(--color-paper);
@@ -565,4 +570,113 @@ body {
   .ssc-title { font-size: 1.15rem; }
   .ssc-desc { font-size: 0.875rem; }
   .dm { padding: 10px 12px; gap: 7px; }
+}
+
+/* ======================================================================= */
+/*  About — rotating 3D wireframe object                                   */
+/* ======================================================================= */
+.about-3d {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin-inline: auto;
+  perspective: 1100px;
+  color: var(--color-ink);
+  isolation: isolate;
+  --cube: clamp(190px, 34vw, 300px);
+}
+.about-aura {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(60% 50% at 80% 0%, color-mix(in oklab, var(--color-ink) 5%, transparent), transparent 60%);
+  opacity: 0.7;
+}
+.about-3d::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  background: radial-gradient(48% 48% at 50% 50%, color-mix(in oklab, var(--color-ink) 6%, transparent) 0%, transparent 70%);
+  filter: blur(18px);
+  z-index: -1;
+  pointer-events: none;
+}
+.about-3d-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--cube);
+  height: var(--cube);
+  margin-left: calc(var(--cube) / -2);
+  margin-top: calc(var(--cube) / -2);
+  transform-style: preserve-3d;
+  animation: about3d-spin 26s linear infinite;
+  will-change: transform;
+}
+@keyframes about3d-spin {
+  from { transform: rotateX(-24deg) rotateY(0deg); }
+  to   { transform: rotateX(-24deg) rotateY(360deg); }
+}
+.about-3d .face {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  width: var(--cube);
+  height: var(--cube);
+  margin-left: calc(var(--cube) / -2);
+  margin-top: calc(var(--cube) / -2);
+  border: 1px solid color-mix(in oklab, var(--color-ink) 20%, transparent);
+  background: color-mix(in oklab, var(--color-ink) 1.5%, transparent);
+  border-radius: 8px;
+  backface-visibility: visible;
+  box-sizing: border-box;
+}
+.about-3d .face-front  { transform: translateZ(calc(var(--cube) / 2)); }
+.about-3d .face-back   { transform: rotateY(180deg) translateZ(calc(var(--cube) / 2)); }
+.about-3d .face-right  { transform: rotateY(90deg)  translateZ(calc(var(--cube) / 2)); }
+.about-3d .face-left   { transform: rotateY(-90deg) translateZ(calc(var(--cube) / 2)); }
+.about-3d .face-top    { transform: rotateX(90deg)  translateZ(calc(var(--cube) / 2)); }
+.about-3d .face-bottom { transform: rotateX(-90deg) translateZ(calc(var(--cube) / 2)); }
+
+.about-3d-ring {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 1px solid color-mix(in oklab, var(--color-ink) 15%, transparent);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+.about-3d-ring-1 {
+  width: calc(var(--cube) * 1.2);
+  height: calc(var(--cube) * 1.2);
+  margin-left: calc(var(--cube) * -0.6);
+  margin-top: calc(var(--cube) * -0.6);
+  transform: rotateX(78deg);
+}
+.about-3d-ring-2 {
+  width: calc(var(--cube) * 1.04);
+  height: calc(var(--cube) * 1.04);
+  margin-left: calc(var(--cube) * -0.52);
+  margin-top: calc(var(--cube) * -0.52);
+  transform: rotateY(72deg) rotateX(18deg);
+}
+.about-3d-core {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--color-ink) 85%, transparent);
+  box-shadow: 0 0 22px 3px color-mix(in oklab, var(--color-ink) 22%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-3d-stage { animation: none !important; transform: rotateX(-24deg) rotateY(30deg); }
 }

@@ -1,9 +1,203 @@
 "use client";
-import Image from "next/image";
-import { ArrowUpRight, Code2, Layers3, Sparkles, Globe2 } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
 
-const proof=[["16","Years Old",Sparkles],["AI","Startup Builder",Layers3],["UI","Frontend Developer",Code2],["PK","Based in Pakistan",Globe2]] as const;
-function Count({value}:{value:string}){const ref=useRef<HTMLSpanElement>(null);const inView=useInView(ref,{once:true});const [shown,setShown]=useState(value==="16"?"0":value);useEffect(()=>{if(value!=="16"||!inView)return;let frame=0;const start=performance.now();const tick=(now:number)=>{const n=Math.min(16,Math.round((now-start)/700*16));setShown(String(n));if(n<16)frame=requestAnimationFrame(tick)};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame)},[inView,value]);return <span ref={ref}>{shown}</span>}
-export function About(){return <section id="about" className="relative overflow-hidden border-b border-[#272521] bg-[#0a0a09] px-5 py-24 sm:px-[7.4vw] sm:py-36"><div className="pointer-events-none absolute left-[18%] top-24 h-[34rem] w-[34rem] rounded-full bg-[#d9c7a5]/[.035] blur-[120px]"/><div className="relative mx-auto max-w-[1440px]"><div className="grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-start lg:gap-16"><div><p className="mb-8 font-mono text-[10px] tracking-[.22em] text-[#d4c6ad]">01 — ABOUT FUNIC X</p><motion.h2 initial={{opacity:0,y:35,filter:"blur(8px)"}} whileInView={{opacity:1,y:0,filter:"blur(0px)"}} viewport={{once:true,amount:.35}} transition={{duration:.9,ease:[.22,1,.36,1]}} className="max-w-3xl font-serif text-[clamp(3.3rem,7vw,7.5rem)] leading-[.88] tracking-[-.075em] text-[#eee3d1]">Building AI Products That Feel <em className="font-normal text-[#cbb895]">Premium.</em></motion.h2><div className="mt-12 max-w-md border-l border-[#cbb895]/60 pl-6"><p className="font-mono text-[10px] tracking-[.2em] text-[#cbb895]">FOUNDER STORY</p><p className="mt-5 text-[15px] leading-7 text-[#b7b0a4]">I’m Funic X — a young builder with a practical obsession: turning sharp ideas into useful, considered digital products. I care about the small decisions that make technology feel human.</p><a className="group mt-7 inline-flex items-center gap-2 font-mono text-[10px] tracking-[.15em] text-[#eee3d1]" href="#contact">LET’S BUILD TOGETHER <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"/></a></div></div><motion.div initial={{opacity:0,scale:.96}} whileInView={{opacity:1,scale:1}} viewport={{once:true,amount:.25}} transition={{duration:1.05,ease:[.22,1,.36,1]}} className="group relative aspect-[4/5] overflow-hidden rounded-sm border border-[#cbb895]/40 bg-[#161411] shadow-[0_30px_90px_rgba(0,0,0,.35)]"><Image src="/about-funicx.png" alt="Funic X founder portrait in warm cinematic light" fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover object-[76%_50%] transition-transform duration-[1.4s] ease-out group-hover:scale-[1.035]"/><div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"/></motion.div></div><div className="mt-20 grid border-y border-[#373229] sm:grid-cols-2 lg:grid-cols-4">{proof.map(([value,label,Icon],index)=><motion.div key={label} initial={{opacity:0,y:18}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:index*.09}} className="flex min-h-32 items-center gap-4 border-[#373229] px-0 py-7 sm:px-6 sm:odd:border-l lg:border-l lg:first:border-l-0"><Icon className="h-4 w-4 text-[#cbb895]"/><p className="text-sm text-[#a9a197]"><b className="mr-1 font-serif text-2xl font-normal text-[#e9dcc5]"><Count value={value}/></b>{label}</p></motion.div>)}</div></div></section>}
+import { ArrowUpRight } from "lucide-react";
+import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { Reveal } from "@/components/ui/primitives";
+
+const stats = [
+  { to: 4000, suffix: "+", decimals: 0, label: "Teams building", sub: "across 60 countries" },
+  { to: 1.2, suffix: "B", decimals: 1, label: "Inferences / month", sub: "and scaling" },
+  { to: 99.99, suffix: "%", decimals: 2, label: "Platform uptime", sub: "SLA-backed" },
+  { to: 42, suffix: "ms", decimals: 0, label: "Median latency", sub: "p50 global edge" },
+] as const;
+
+/* ============================ Count-up ============================ */
+function CountUp({
+  to,
+  decimals = 0,
+  suffix = "",
+}: {
+  to: number;
+  decimals?: number;
+  suffix?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-15% 0px" });
+  const reduce = useReducedMotion();
+  const [val, setVal] = useState(reduce ? to : 0);
+
+  useEffect(() => {
+    if (!inView || reduce) {
+      setVal(to);
+      return;
+    }
+    let raf = 0;
+    const start = performance.now();
+    const dur = 1600;
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 4);
+      setVal(to * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, to, reduce]);
+
+  const formatted = val.toLocaleString("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {formatted}
+      {suffix}
+    </span>
+  );
+}
+
+/* ============================ Stat Card ============================ */
+type Stat = (typeof stats)[number];
+
+const cardEnter: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const cardStatic: Variants = {
+  hidden: { opacity: 1, y: 0 },
+  show: { opacity: 1, y: 0 },
+};
+
+function StatCard({ stat: s }: { stat: Stat }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      variants={reduce ? cardStatic : cardEnter}
+      whileHover={reduce ? undefined : { y: -6 }}
+      transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20 }}
+      className="group relative overflow-hidden rounded-2xl border border-line bg-paper p-5 transition-[border-color,box-shadow] duration-300 hover:border-ink/20 hover:shadow-[0_18px_40px_rgba(10,10,10,0.10)]"
+    >
+      {/* subtle top sheen on hover */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(120% 80% at 50% 0%, color-mix(in oklab, var(--color-ink) 3%, transparent), transparent 70%)",
+        }}
+      />
+      <div className="relative text-[clamp(1.85rem,3vw,2.4rem)] font-semibold leading-none tracking-[-0.04em] text-ink tabular-nums">
+        <CountUp to={s.to} decimals={s.decimals} suffix={s.suffix} />
+      </div>
+      <div className="relative mt-2.5 text-[14px] font-medium text-ink">{s.label}</div>
+      <div className="relative mt-1 text-[12px] text-ink-mute">{s.sub}</div>
+    </motion.div>
+  );
+}
+
+/* ============================ Section ============================ */
+export function About() {
+  const reduce = useReducedMotion();
+  const gridRef = useRef<HTMLDivElement>(null);
+  const gridInView = useInView(gridRef, { once: true, margin: "-12% 0px" });
+
+  return (
+    <motion.section
+      id="about"
+      initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: reduce ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="relative overflow-hidden border-y border-line bg-paper px-6 py-4 sm:px-12 sm:py-8 lg:px-24 lg:py-14"
+    >
+      <span className="about-aura" aria-hidden />
+
+      <div className="relative mx-auto max-w-[1200px]">
+        {/* ---------------- Top area ---------------- */}
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-2 lg:items-center lg:gap-12">
+          {/* Left: heading + description */}
+          <div>
+            <p className="mb-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-ink-mute">
+              01 — About
+            </p>
+            <h2 className="max-w-[20ch] text-[clamp(2.25rem,4vw+8px,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-ink">
+              Building AI products that feel <span className="text-ink-soft">premium.</span>
+            </h2>
+
+            <div className="mt-5 max-w-md border-l border-ink/15 pl-6 sm:mt-6">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-mute">
+                Founder story
+              </p>
+              <p className="mt-4 text-[16px] leading-7 text-ink-soft">
+                I&rsquo;m Funic X — a young builder with a practical obsession: turning sharp ideas
+                into useful, considered digital products. I care about the small decisions that make
+                technology feel human.
+              </p>
+              <a
+                href="#contact"
+                className="group mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-ink"
+              >
+                Let&rsquo;s build together
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right: rotating 3D wireframe object */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="about-3d" aria-hidden>
+              <div className="about-3d-stage">
+                <span className="face face-front" />
+                <span className="face face-back" />
+                <span className="face face-right" />
+                <span className="face face-left" />
+                <span className="face face-top" />
+                <span className="face face-bottom" />
+                <span className="about-3d-ring about-3d-ring-1" />
+                <span className="about-3d-ring about-3d-ring-2" />
+                <span className="about-3d-core" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ---------------- Stats block — naturally follows ---------------- */}
+        <div className="mt-10 sm:mt-12 lg:mt-14">
+          <div className="mb-4 flex justify-center">
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-line bg-mist px-4 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink-soft">
+              <span className="h-1.5 w-1.5 rounded-full bg-ink" />
+              By the numbers
+            </span>
+          </div>
+
+          <Reveal className="mx-auto mb-6 max-w-[680px] text-center sm:mb-8">
+            <h2 className="text-[clamp(2rem,3.2vw+8px,3rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-ink">
+              Trusted at scale, built for speed.
+            </h2>
+          </Reveal>
+
+          <motion.div
+            ref={gridRef}
+            className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4"
+            initial="hidden"
+            animate={gridInView ? "show" : "hidden"}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: reduce ? 0 : 0.1 } },
+            }}
+          >
+            {stats.map((s) => (
+              <StatCard key={s.label} stat={s} />
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </motion.section>
+  );
+}

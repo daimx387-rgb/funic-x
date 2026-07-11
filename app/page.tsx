@@ -2,7 +2,7 @@ import { MotionShell } from "@/components/motion-shell";
 import { Nav } from "@/components/nav";
 import { Hero } from "@/sections/hero";
 import { Features } from "@/sections/features";
-import { Stats } from "@/sections/stats";
+import { About } from "@/sections/about";
 import { Testimonials } from "@/sections/testimonials";
 import { Pricing } from "@/sections/pricing";
 import { FAQ } from "@/sections/faq";
@@ -16,7 +16,7 @@ export default function Home() {
       <main>
         <Hero />
         <Features />
-        <Stats />
+        <About />
         <Testimonials />
         <Pricing />
         <FAQ />
