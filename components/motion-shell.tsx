@@ -13,11 +13,19 @@ export function MotionShell() {
       const max = document.body.scrollHeight - window.innerHeight || 1;
       document.documentElement.style.setProperty("--scroll", `${window.scrollY / max}`);
     };
-    setProgress();
 
     const onPointer = (e: PointerEvent) => {
       if (cursor) cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
     };
+
+    // Defer the first layout read until after the document (and its
+    // stylesheets) have loaded so we don't force a reflow too early.
+    const runProgress = () => requestAnimationFrame(setProgress);
+    if (document.readyState === "complete") {
+      runProgress();
+    } else {
+      window.addEventListener("load", runProgress, { once: true });
+    }
 
     window.addEventListener("scroll", setProgress, { passive: true });
     window.addEventListener("lenis-scroll", setProgress);
@@ -49,6 +57,7 @@ export function MotionShell() {
       window.removeEventListener("scroll", setProgress);
       window.removeEventListener("lenis-scroll", setProgress);
       window.removeEventListener("pointermove", onPointer);
+      window.removeEventListener("load", runProgress);
       ctx?.revert();
     };
   }, []);

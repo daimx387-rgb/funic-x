@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Sparkles, Star } from "lucide-react";
-import { useRef, useState } from "react";
+import { Sparkles, Star } from "lucide-react";
+import { useRef } from "react";
 import VariableProximity from "@/components/VariableProximity";
 import CardSwap, { Card } from "@/components/CardSwap";
 import {
@@ -26,7 +26,6 @@ export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-5% 0px" });
-  const [email, setEmail] = useState("");
 
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
@@ -109,40 +108,6 @@ export function Hero() {
               AI-native workspace — go from idea to production in days, not
               quarters.
             </motion.p>
-
-            {/* Email capture */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.9, ease, delay: 0.35 }}
-              className="mt-8 w-full max-w-[480px]"
-            >
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="group relative flex items-center gap-2 rounded-[9999px] border border-line bg-mist/60 p-1.5 pl-5 backdrop-blur-md transition-all duration-300 focus-within:border-ink/30 focus-within:bg-ink/[0.06]"
-              >
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-10 flex-1 bg-transparent text-[15px] text-ink outline-none placeholder:text-ink-mute"
-                />
-                <motion.button
-                  type="submit"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="cta-glow relative inline-flex h-11 shrink-0 items-center gap-2 overflow-hidden rounded-[9999px] bg-ink px-7 text-[15px] font-semibold text-paper"
-                >
-                  <span className="relative">Get Started</span>
-                  <ArrowRight className="relative h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
-                </motion.button>
-              </form>
-              <p className="mt-3 pl-5 font-mono text-[11.5px] tracking-[0.04em] text-ink-mute">
-                Start free — no credit card required.
-              </p>
-            </motion.div>
 
             {/* Trust row */}
             <motion.div

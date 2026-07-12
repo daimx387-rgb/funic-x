@@ -36,7 +36,7 @@ const plans: Plan[] = [
       "Basic observability",
       "Shared models",
     ],
-    cta: "Get started",
+    cta: "Get Started",
   },
   {
     name: "Pro",
@@ -52,7 +52,7 @@ const plans: Plan[] = [
       "One-click edge deploy",
       "Versioned datasets",
     ],
-    cta: "Start free trial",
+    cta: "Start Free Trial",
     popular: true,
     glow: true,
   },
@@ -69,7 +69,7 @@ const plans: Plan[] = [
       "Custom integrations",
       "Audit logs & RBAC",
     ],
-    cta: "Contact sales",
+    cta: "Contact Sales",
     glow: true,
   },
 ];
@@ -92,7 +92,7 @@ export function Pricing() {
             const inner = (
               <>
                 {popularBadge}
-                <div className="flex h-full flex-col p-8">
+                <div className="flex h-full flex-col p-9">
                   <div className="text-[17px] font-semibold text-ink">{p.name}</div>
                   <div className="mt-6 flex items-baseline gap-2">
                     <span className="text-[44px] font-semibold leading-none tracking-[-0.04em] text-ink">
@@ -119,15 +119,16 @@ export function Pricing() {
                     ))}
                   </ul>
 
-                  <Magnetic strength={0.18} className="mt-8">
+                  <Magnetic strength={0.18} className="mt-10">
                     <motion.a
                       href="#"
-                      whileHover={{ y: -2 }}
-                      whileTap={{ scale: 0.97 }}
-                      className={`shine group relative inline-flex h-14 w-full items-center justify-center gap-2 overflow-hidden rounded-[9999px] px-7 text-[15px] font-semibold transition-shadow duration-300 ${
+                      whileHover={{ y: -2, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                      className={`shine group relative inline-flex h-14 w-full items-center justify-center gap-2 overflow-hidden rounded-[9999px] px-8 font-semibold tracking-[-0.01em] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
                         p.popular
-                          ? "bg-ink text-paper hover:shadow-[0_10px_30px_rgba(10,10,10,0.2)]"
-                          : "border border-line bg-paper text-ink hover:border-ink"
+                          ? "bg-ink text-paper text-[16px] shadow-[0_12px_30px_rgba(10,10,10,0.22)] hover:shadow-[0_16px_44px_rgba(10,10,10,0.3)]"
+                          : "border border-ink bg-transparent text-ink text-[15px] hover:bg-ink hover:text-paper"
                       }`}
                     >
                       <span className="relative">{p.cta}</span>

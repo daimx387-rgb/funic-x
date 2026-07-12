@@ -12,7 +12,7 @@ const cols = [
   },
   {
     title: "Company",
-    links: ["About", "Careers", "Blog", "Press", "Contact"],
+    links: ["About", "Careers", "Blog", "Press"],
   },
   {
     title: "Resources",
@@ -32,7 +32,7 @@ export function Footer() {
   const [sent, setSent] = useState(false);
 
   return (
-    <footer id="contact" className="section relative bg-mist">
+    <footer id="footer" className="section relative bg-mist">
       <div className="container-x">
         {/* CTA band */}
         <Reveal className="mb-20 overflow-hidden rounded-[24px] border border-line bg-paper p-10 sm:p-16">

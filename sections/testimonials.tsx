@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Reveal, SectionLabel } from "@/components/ui/primitives";
 
 type Quote = {
@@ -83,9 +84,7 @@ export function Testimonials() {
         <SectionLabel>Loved by builders</SectionLabel>
         <Reveal className="mx-auto mb-16 max-w-[680px] text-center">
           <h2 className="text-[clamp(2rem,3.2vw+8px,3rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-ink">
-            What teams say after
-            <br />
-            switching to Funic X.
+            What teams say after switching to Funic X
           </h2>
         </Reveal>
       </div>

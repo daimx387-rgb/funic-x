@@ -140,7 +140,7 @@ export function About() {
                 technology feel human.
               </p>
               <a
-                href="#contact"
+                href="#footer"
                 className="group mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-ink"
               >
                 Let&rsquo;s build together

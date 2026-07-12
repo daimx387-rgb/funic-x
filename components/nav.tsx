@@ -5,12 +5,14 @@ import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motio
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Magnetic } from "@/components/ui/primitives";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
   { label: "Features", href: "#features" },
+  { label: "Services", href: "#services" },
   { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export function Nav() {
@@ -78,6 +80,7 @@ export function Nav() {
 
         {/* Right actions */}
         <div className="relative z-10 hidden items-center gap-4 md:flex">
+          <ThemeToggle className="hidden md:grid" />
           <a
             href="#"
             className="rounded-full px-5 py-2.5 text-[16px] font-medium text-ink-soft transition-colors duration-300 hover:text-ink"
@@ -105,6 +108,7 @@ export function Nav() {
 
         {/* Mobile actions */}
         <div className="relative z-10 flex items-center gap-2 md:hidden">
+          <ThemeToggle className="md:hidden" />
           <button
             type="button"
             aria-label="Toggle navigation"

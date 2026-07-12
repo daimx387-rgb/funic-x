@@ -13,7 +13,7 @@ const projects = [
 
 export function Work() {
   return <section id="work" className="work section">
-    <div className="section-top"><p className="label">SELECTED WORK</p><a href="#contact">VIEW ALL WORK <ArrowUpRight/></a></div>
+    <div className="section-top"><p className="label">SELECTED WORK</p><a href="#footer">VIEW ALL WORK <ArrowUpRight/></a></div>
     <div className="projects">
       {projects.map(([title, tag, position], index) => <motion.article key={title} className={`card card-${index}`} initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .2 }} transition={{ delay: index * .12, duration: .75 }}>
         <div className="art group">

@@ -114,3 +114,29 @@
     transform: scale(0.6) translateY(0);
   }
 }
+
+/* ---------- dark mode: frosted black glass cards ---------- */
+.dark .card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    0 12px 40px -12px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(18px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+}
+
+.dark .card-product .card-shot {
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark .card-title {
+  color: #fafafa !important;
+}
+
+.dark .card-desc {
+  color: #a1a1a1 !important;
+}
