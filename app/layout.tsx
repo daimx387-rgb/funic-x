@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <link rel="preconnect" href="https://rsms.me" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){}else{document.documentElement.classList.add("dark")}}catch(e){}})();`,
+            __html: `(function(){try{document.documentElement.classList.add("dark");localStorage.setItem("theme","dark")}catch(e){}})();`,
           }}
         />
       </head>

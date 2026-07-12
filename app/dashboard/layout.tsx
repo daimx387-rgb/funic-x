@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <head>
         <link rel="preconnect" href="https://rsms.me" />
       </head>
-      <body className="bg-[#050505]">
+      <body className="dark bg-[#000000]">
         <DashboardShell>{children}</DashboardShell>
       </body>
     </html>

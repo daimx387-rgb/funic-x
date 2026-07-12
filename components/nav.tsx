@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -16,7 +16,6 @@ const links = [
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 24);
@@ -24,19 +23,6 @@ export function Nav() {
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
-
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  const toggleDark = () => {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    try {
-      localStorage.setItem("theme", next ? "dark" : "light");
-    } catch {}
-  };
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -92,14 +78,6 @@ export function Nav() {
 
         {/* Right actions */}
         <div className="relative z-10 hidden items-center gap-4 md:flex">
-          <button
-            type="button"
-            aria-label="Toggle theme"
-            onClick={toggleDark}
-            className="grid h-10 w-10 place-items-center rounded-full border border-line text-ink transition-colors duration-300 hover:bg-mist"
-          >
-            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </button>
           <a
             href="#"
             className="rounded-full px-5 py-2.5 text-[16px] font-medium text-ink-soft transition-colors duration-300 hover:text-ink"
@@ -127,14 +105,6 @@ export function Nav() {
 
         {/* Mobile actions */}
         <div className="relative z-10 flex items-center gap-2 md:hidden">
-          <button
-            type="button"
-            aria-label="Toggle theme"
-            onClick={toggleDark}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-paper/60 text-ink transition-colors hover:bg-mist"
-          >
-            {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
           <button
             type="button"
             aria-label="Toggle navigation"

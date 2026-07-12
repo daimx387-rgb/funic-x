@@ -468,15 +468,19 @@
   }
 }
 
-/* ---------- Dark mode color overrides ---------- */
+/* ---------- Dark mode color overrides (full deep black) ---------- */
 .dark {
-  --color-paper: #0a0a0a;
-  --color-mist: #161616;
-  --color-ink: #f5f5f5;
-  --color-ink-soft: #a3a3a3;
-  --color-ink-mute: #737373;
-  --color-line: #262626;
-  --color-line-soft: #1a1a1a;
+  --color-paper: #000000;
+  --color-mist: #0a0a0a;
+  --color-ink: #fafafa;
+  --color-ink-soft: #a1a1a1;
+  --color-ink-mute: #6b6b6b;
+  --color-line: #1f1f1f;
+  --color-line-soft: #141414;
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.5), 0 24px 48px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 30px 60px rgba(0, 0, 0, 0.55);
 }
 
 @font-face {
@@ -722,8 +726,8 @@ body {
   background:
     radial-gradient(120% 90% at 72% 18%, rgba(255,255,255,0.05) 0%, transparent 55%),
     radial-gradient(100% 80% at 25% 85%, rgba(255,255,255,0.035) 0%, transparent 60%),
-    #050505;
-  color: #f5f5f5;
+    #000000;
+  color: #fafafa;
   --hero-dot: rgba(255,255,255,0.5);
 }
 .hero-v2 .ink       { color: var(--color-ink); }
