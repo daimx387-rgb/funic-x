@@ -185,7 +185,7 @@ function AccordionCard({
         </button>
 
         <div ref={panelRef} className="overflow-hidden" role="region" aria-labelledby={headerId} aria-hidden={!isOpen}>
-          <p className="px-6 pb-6 text-[14px] leading-[1.6] text-ink-soft dark:text-ink-mute">
+          <p className="px-6 pb-6 text-[14px] leading-[1.6] text-ink-soft dark:text-paper">
             {item.a}
           </p>
         </div>
@@ -210,7 +210,7 @@ export function FAQ() {
 
         <Reveal
           delay={0.08}
-          className="mx-auto mt-3 max-w-[480px] text-center text-[14px] leading-[1.55] text-ink-soft dark:text-ink-mute"
+          className="mx-auto mt-3 max-w-[480px] text-center text-[14px] leading-[1.55] text-ink-soft dark:text-white/70"
         >
           Everything you need to know about building, shipping, and scaling AI
           products with Funic X.
